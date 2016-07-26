@@ -9,7 +9,10 @@ public class BillType {
     private String title;
     private int imageId;
 
-    private BillType(int id, String title, int imageId){
+    public BillType(){
+
+    }
+    public BillType(int id, String title, int imageId){
         this.id = id;
         this.title = title;
         this.imageId = imageId;

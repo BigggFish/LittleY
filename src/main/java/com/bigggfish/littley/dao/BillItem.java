@@ -5,9 +5,14 @@ package com.bigggfish.littley.dao;
  */
 public class BillItem {
 
+    private int id;
+    private long timeStamp;
+    private int amount;
+    private int billTypeId;
     private boolean isSpend;
-    private boolean isNormal;
 
+    public BillItem(){
+    }
     public boolean isSpend() {
         return isSpend;
     }
@@ -16,16 +21,35 @@ public class BillItem {
         isSpend = spend;
     }
 
-    public boolean isNormal() {
-        return isNormal;
+    public int getId() {
+        return id;
     }
 
-    public void setNormal(boolean normal) {
-        isNormal = normal;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public BillItem(boolean isNormal, boolean isSpend){
-        this.isSpend = isSpend;
-        this.isNormal = isNormal;
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getBillTypeId() {
+        return billTypeId;
+    }
+
+    public void setBillTypeId(int billTypeId) {
+        this.billTypeId = billTypeId;
     }
 }

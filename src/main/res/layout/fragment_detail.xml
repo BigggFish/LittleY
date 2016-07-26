@@ -30,12 +30,12 @@
     </android.support.design.widget.AppBarLayout>
 
     <!--<include layout="@layout/nestscrollview" />-->
-    <ListView
+    <ExpandableListView
         android:id="@+id/lv_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp"
         android:divider="@android:color/transparent">
-    </ListView>
+    </ExpandableListView>
 
 </android.support.design.widget.CoordinatorLayout>

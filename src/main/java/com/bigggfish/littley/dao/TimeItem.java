@@ -5,12 +5,17 @@ package com.bigggfish.littley.dao;
  */
 public class TimeItem {
     private int id;
-    private int amount;
+    private int dayAmount;
     private long timeStamp;
     private int year;
     private int month;
     private int day;
+    private int billTime;
 
+    public TimeItem(int dayAmount, int billTime){
+        this.billTime = billTime;
+        this.dayAmount = dayAmount;
+    }
     public int getId() {
         return id;
     }
@@ -51,11 +56,19 @@ public class TimeItem {
         this.day = day;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getBillTime() {
+        return billTime;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setBillTime(int billTime) {
+        this.billTime = billTime;
+    }
+
+    public int getDayAmount() {
+        return dayAmount;
+    }
+
+    public void setDayAmount(int dayAmount) {
+        this.dayAmount = dayAmount;
     }
 }

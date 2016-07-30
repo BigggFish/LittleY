@@ -1,5 +1,6 @@
 package com.bigggfish.littley;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.WindowInsetsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     private RadioGroup rgMain;
     private ViewPager vpMain;
+    private MineFragment mineFragment;
+    private DetailFragment detailFragment;
+    private AddFragment addFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,14 +70,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 ((RadioButton)rgMain.getChildAt(position)).setChecked(true);
-                if (position == 1) {
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-                    }
-                } else if (position == 2) {
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                        getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
-                    }
+                switch (position){
+                    case 0:
+                        Log.e("---->OUT", "detailfragment");
+                        if(detailFragment != null){
+                            Log.e("---->OUT", "detailfragment != null");
+                            detailFragment.updateData();
+                        }else{
+                            Log.e("---->OUT", "detailfragment = null");
+                        }
+                        break;
+                    case 1:
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+                        }
+                        break;
+                    case 2:
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+                        }
+                        break;
                 }
             }
 
@@ -114,11 +131,14 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return DetailFragment.newInstance();
+                    detailFragment = DetailFragment.newInstance();
+                    return detailFragment;
                 case 1:
-                    return AddFragment.newInstance();
+                    addFragment = AddFragment.newInstance();
+                    return addFragment;
                 case 2:
-                    return MineFragment.newInstance("", "");
+                    mineFragment = MineFragment.newInstance("", "");
+                    return mineFragment;
             }
             return null;
         }
@@ -129,4 +149,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == 202 && mineFragment != null){
+            mineFragment.onActivityResult(requestCode, resultCode, data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

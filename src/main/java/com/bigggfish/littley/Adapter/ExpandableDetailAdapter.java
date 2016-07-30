@@ -18,6 +18,7 @@ import com.bigggfish.littley.R;
 import com.bigggfish.littley.dao.BillItem;
 import com.bigggfish.littley.dao.TimeItem;
 import com.bigggfish.littley.util.AnimatorTools;
+import com.bigggfish.littley.util.Constant;
 
 import java.util.List;
 
@@ -44,12 +45,20 @@ public class ExpandableDetailAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return timeItemList.size();
+        if(billItemLists != null){
+            return timeItemList.size();
+        }
+        return 0;
     }
 
     @Override
     public int getChildrenCount(int i) {
-        return billItemLists.get(i).size();
+        if(billItemLists != null && billItemLists.size() > 0){
+            if(billItemLists.get(i) != null){
+                return billItemLists.get(i).size();
+            }
+        }
+        return 0;
     }
 
     @Override
@@ -88,8 +97,8 @@ public class ExpandableDetailAdapter extends BaseExpandableListAdapter {
             groupViewHolder = (GroupViewHolder) convertView.getTag();
         }
         TimeItem timeItem = timeItemList.get(i);
-        groupViewHolder.tvBillDate.setText(timeItem.getMonth() + "月" + timeItem.getDay() + "日");
-        groupViewHolder.tvBillAmount.setText("￥"+timeItem.getAmount());
+        groupViewHolder.tvBillDate.setText((timeItem.getBillTime()%10000)/100 +"月" + timeItem.getBillTime()%100 + "日");
+        groupViewHolder.tvBillAmount.setText("￥"+timeItem.getDayAmount());
         return convertView;
     }
 
@@ -105,15 +114,17 @@ public class ExpandableDetailAdapter extends BaseExpandableListAdapter {
         }
 
         BillItem billItem = billItemLists.get(groupPosition).get(childPosition);
-        childViewHolder.ivDetailType.setImageResource(R.drawable.ic_zhichu_type_default);
+
         if(billItem.isSpend()){
             childViewHolder.tvSpendAmount.setVisibility(View.VISIBLE);
             childViewHolder.tvSpendAmount.setText("￥" + billItem.getAmount());
             childViewHolder.tvIncomeAmount.setVisibility(View.INVISIBLE);
+            childViewHolder.ivDetailType.setImageResource(Constant.TYPE_IMAGES_ID[billItem.getBillTypeId()-1]);
         }else{
             childViewHolder.tvIncomeAmount.setVisibility(View.VISIBLE);
             childViewHolder.tvIncomeAmount.setText("￥" + billItem.getAmount());
             childViewHolder.tvSpendAmount.setVisibility(View.INVISIBLE);
+            childViewHolder.ivDetailType.setImageResource(Constant.TYPE_IMAGES_ID[billItem.getBillTypeId()-1 + 14]);
         }
         final View itemView = convertView;
         if(groupPosition != expandGroupPosition && childPosition != expandChildPosition){

@@ -35,23 +35,23 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_spend_amount"
+        android:id="@+id/tv_income_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="16dp"
         android:layout_toLeftOf="@id/ll_detail_type"
-        android:text="支出：￥8888"
+        android:text="收入：￥8888"
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/tv_income_amount"
+        android:id="@+id/tv_spend_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_toRightOf="@id/ll_detail_type"
-        android:text="收入：￥8888"
+        android:text="支出：￥8888"
         android:textSize="14sp" />
 
 

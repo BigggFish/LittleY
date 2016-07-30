@@ -2,45 +2,48 @@ package com.bigggfish.littley.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.bigggfish.littley.R;
 
+import java.util.Calendar;
 
-public class AddFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class AddFragment extends Fragment implements View.OnClickListener{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final int PAGE_NUM = 2;
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private int year = 0;
+    private int month = 0;
+    private int day = 0;
 
     private View parent;
     private ViewPager vpAdd;
     private TabLayout tabLayout;
     private Toolbar toolbar;
+    private FloatingActionButton fabtSubmit;
+    private TextView tvCalendar;
+
+    private OnIncomeFabtClickListener onIncomeFabtClickListener;
+    private OnSpendFabtClickListener onSpendFabtClickListener;
 
     public AddFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment AddFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AddFragment newInstance() {
         AddFragment fragment = new AddFragment();
     /*    Bundle args = new Bundle();
@@ -66,11 +69,53 @@ public class AddFragment extends Fragment {
         vpAdd = (ViewPager) parent.findViewById(R.id.vp_add);
         toolbar = (Toolbar) parent.findViewById(R.id.toolbar);
         tabLayout = (TabLayout) parent.findViewById(R.id.tl_add);
+        fabtSubmit = (FloatingActionButton) parent.findViewById(R.id.fabt_submit);
+        tvCalendar = (TextView) parent.findViewById(R.id.tv_calendar);
+
+        Calendar calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH) + 1;
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        Log.e("----OUT", "year:" + year + "month:" + month + "day:" + day);
+        tvCalendar.setText(year % 100 + "-" + (month > 9 ? month : "0" + month) +"-"+ (day > 9 ? day : "0" + day));
+        fabtSubmit.setOnClickListener(this);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        vpAdd.setAdapter(new AddPagerAdapter(getActivity().getSupportFragmentManager()));
+        vpAdd.setAdapter(new AddPagerAdapter(getChildFragmentManager()));
         tabLayout.setupWithViewPager(vpAdd);
         toolbar = (Toolbar) parent.findViewById(R.id.toolbar);
         return parent;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.fabt_submit:
+                if(vpAdd.getCurrentItem() == 0){
+                    if(onSpendFabtClickListener != null){
+                        onSpendFabtClickListener.onFabtClick(year, month, day);
+                    }
+                }else{
+                    if(onIncomeFabtClickListener != null){
+                        onIncomeFabtClickListener.onFabtClick(year, month, day);
+                    }
+                }
+                break;
+        }
+    }
+
+    public void setOnIncomeFabtClickListener(OnIncomeFabtClickListener onIncomeFabtClickListener) {
+        this.onIncomeFabtClickListener = onIncomeFabtClickListener;
+    }
+
+    public void setOnSpendFabtClickListener(OnSpendFabtClickListener onSpendFabtClickListener) {
+        this.onSpendFabtClickListener = onSpendFabtClickListener;
+    }
+
+    public interface OnIncomeFabtClickListener{
+        void onFabtClick(int year, int month, int day);//留出选择时间的接口
+    }
+    public interface OnSpendFabtClickListener{
+        void onFabtClick(int year, int month, int day);//留出选择时间的接口
     }
     class AddPagerAdapter extends FragmentPagerAdapter {
 
@@ -82,9 +127,9 @@ public class AddFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return AddIncomeFragment.newInstance("", "");
+                    return AddSpendFragment.newInstance("", "");
                 case 1:
-                    return AddSpendFragment.newInstance("","");
+                    return AddIncomeFragment.newInstance("","");
 
             }
             return null;
@@ -99,9 +144,9 @@ public class AddFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             switch (position){
                 case 0:
-                    return "添加收入";
-                case 1:
                     return "添加支出";
+                case 1:
+                    return "添加收入";
             }
             return null;
         }

@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup rgMain;
     private ViewPager vpMain;
     private MineFragment mineFragment;
+    private DetailFragment detailFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,14 +68,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 ((RadioButton)rgMain.getChildAt(position)).setChecked(true);
-                if (position == 1) {
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-                    }
-                } else if (position == 2) {
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                        getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
-                    }
+                switch (position){
+                    case 0:
+                        if(detailFragment != null){
+                            detailFragment.refreshData();
+                        }
+                        break;
+                    case 1:
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+                        }
+                        break;
+                    case 2:
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+                        }
+                        break;
                 }
             }
 
@@ -116,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return DetailFragment.newInstance();
+                    detailFragment = DetailFragment.newInstance();
+                    return detailFragment;
                 case 1:
                     return AddFragment.newInstance();
                 case 2:

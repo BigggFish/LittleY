@@ -35,11 +35,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     private ImageView expandEditImageView = null;
     private View parentView;
     private ExpandableListView elvDetail;
+    private ExpandableDetailAdapter expandableDetailAdapter;
     private TextView tvDetailAction;
 
     private DBManager dbManager;
-    private List<List<BillItem>> billItemLists;
-    private List<TimeItem> timeItemList;
+    private List<List<BillItem>> billItemLists = new ArrayList<>();
+    private List<TimeItem> timeItemList = new ArrayList<>();
 
     public DetailFragment() {
     }
@@ -69,7 +70,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
         initData();
         tvDetailAction.setOnClickListener(this);
-        final ExpandableDetailAdapter expandableDetailAdapter = new ExpandableDetailAdapter(this.getActivity(), timeItemList, billItemLists);
+        expandableDetailAdapter = new ExpandableDetailAdapter(this.getActivity(), timeItemList, billItemLists);
         elvDetail.setAdapter(expandableDetailAdapter);
         elvDetail.setGroupIndicator(null);
         for (int i = 0; i < expandableDetailAdapter.getGroupCount(); i++) {
@@ -305,9 +306,17 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         super.onDetach();
     }
 
+    public void refreshData(){
+        initData();
+        if(expandableDetailAdapter != null){
+            expandableDetailAdapter.notifyDataSetChanged();
+        }
+        for(int i=0; i<timeItemList.size(); i++){
+            elvDetail.expandGroup(i);
+        }
+    }
+
     private void  initData() {
-        billItemLists = new ArrayList<>();
-        timeItemList = new ArrayList<>();
         dbManager = new DBManager(getActivity());
         List<BillItem> billItemList = dbManager.queryAllBill();
         Log.e("---->OUT", "size:" + billItemList.size());

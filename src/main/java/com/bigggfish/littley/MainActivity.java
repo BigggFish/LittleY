@@ -1,5 +1,6 @@
 package com.bigggfish.littley;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RadioGroup rgMain;
     private ViewPager vpMain;
+    private MineFragment mineFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return AddFragment.newInstance();
                 case 2:
-                    return MineFragment.newInstance("", "");
+                    mineFragment = MineFragment.newInstance("", "");
+                    return mineFragment;
             }
             return null;
         }
@@ -129,4 +132,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == 202 && mineFragment != null){
+            mineFragment.onActivityResult(requestCode, resultCode, data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

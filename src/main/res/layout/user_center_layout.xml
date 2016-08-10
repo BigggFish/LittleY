@@ -89,6 +89,7 @@
             android:textSize="16sp" />
 
         <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_need_pw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -105,6 +106,7 @@
         android:layout_marginLeft="40dp" />
 
     <TextView
+        android:id="@+id/tv_clear_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
@@ -124,6 +126,7 @@
         android:layout_marginLeft="40dp" />
 
     <RelativeLayout
+        android:id="@+id/rl_spend_limit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white">
@@ -142,12 +145,13 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_spend_limit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:text="￥0.0" />
+            android:text="￥3000" />
     </RelativeLayout>
 
     <View
@@ -155,6 +159,7 @@
         android:layout_height="16dp" />
 
     <TextView
+        android:id="@+id/tv_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
@@ -175,6 +180,7 @@
         android:layout_marginLeft="40dp" />
 
     <TextView
+        android:id="@+id/tv_check_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
@@ -194,6 +200,7 @@
         android:layout_marginLeft="40dp" />
 
     <TextView
+        android:id="@+id/tv_about_us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"

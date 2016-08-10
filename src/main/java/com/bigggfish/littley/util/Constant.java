@@ -16,7 +16,6 @@ public class Constant {
     //报销；工资；红包；兼职；奖金；投资；
 
     public static final int[] TYPE_IMAGES_ID = new int[]{
-            R.drawable.ic_zhichu_type_default,
             R.drawable.icon_zhichu_type_canyin,
             R.drawable.icon_zhichu_type_jiaotong,
             R.drawable.icon_zhichu_type_yifu,
@@ -32,12 +31,13 @@ public class Constant {
             R.drawable.shumachanpin,
             R.drawable.icon_shouru_type_qita,
             //收入
-            R.drawable.baoxiao,
             R.drawable.icon_shouru_type_gongzi,
+            R.drawable.baoxiao,
             R.drawable.icon_shouru_type_hongbao,
             R.drawable.icon_shouru_type_jianzhiwaikuai,
             R.drawable.icon_shouru_type_jiangjin,
-            R.drawable.icon_shouru_type_touzishouru
+            R.drawable.icon_shouru_type_touzishouru,
+            R.drawable.icon_shouru_type_qita
     };
 
 }

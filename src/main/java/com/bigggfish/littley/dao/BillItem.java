@@ -10,9 +10,12 @@ public class BillItem {
     private int amount;
     private int billTypeId;
     private boolean isSpend;
+    private String billRemark;
+    private int billTime;
 
-    public BillItem(){
+    public BillItem() {
     }
+
     public boolean isSpend() {
         return isSpend;
     }
@@ -51,5 +54,21 @@ public class BillItem {
 
     public void setBillTypeId(int billTypeId) {
         this.billTypeId = billTypeId;
+    }
+
+    public String getBillRemark() {
+        return billRemark;
+    }
+
+    public void setBillRemark(String billRemark) {
+        this.billRemark = billRemark;
+    }
+
+    public int getBillTime() {
+        return billTime;
+    }
+
+    public void setBillTime(int billTime) {
+        this.billTime = billTime;
     }
 }

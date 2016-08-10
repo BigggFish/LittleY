@@ -45,11 +45,12 @@ public class DetailAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (billItemList.get(position).isNormal()) {
+        /*if (billItemList.get(position).isNormal()) {
             return TYPE_BILL_NORMAL;
         } else {
             return TYPE_BILL_DATE;
-        }
+        }*/
+        return 0;
     }
 
     @Override

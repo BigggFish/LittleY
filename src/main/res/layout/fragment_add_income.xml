@@ -27,14 +27,15 @@
                     android:layout_height="32dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:src="@drawable/ic_zhichu_type_default" />
+                    android:src="@drawable/icon_shouru_type_gongzi" />
 
                 <TextView
+                    android:id="@+id/tv_selected_bill_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:text="默认"
+                    android:text="工资"
                     android:textSize="16sp" />
 
                 <EditText
@@ -44,7 +45,8 @@
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:gravity="right"
-                    android:hint="请输入金额"
+                    android:hint="￥0"
+                    android:lines="1"
                     android:inputType="number"
                     android:paddingBottom="16dp"
                     android:paddingRight="8dp"
@@ -55,7 +57,7 @@
                 android:id="@+id/gv_income_type"
                 android:layout_width="match_parent"
                 android:layout_height="224dp"
-                android:numColumns="6" />
+                android:numColumns="5" />
 
             <EditText
                 android:id="@+id/et_income_remarks"

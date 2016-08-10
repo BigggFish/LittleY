@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bigggfish.littley.R;
 import com.bigggfish.littley.dao.BillType;
+import com.bigggfish.littley.util.Constant;
 
 import java.util.List;
 
@@ -20,9 +21,11 @@ public class BillTypeAdapter extends BaseAdapter {
 
     private Context context;
     private List<BillType> billTypeList;
-    public BillTypeAdapter(Context context, List<BillType> billTypeList){
+    private boolean isSpend;
+    public BillTypeAdapter(Context context, List<BillType> billTypeList, boolean isSpend){
         this.context = context;
         this.billTypeList = billTypeList;
+        this.isSpend = isSpend;
     }
     @Override
     public int getCount() {
@@ -49,7 +52,9 @@ public class BillTypeAdapter extends BaseAdapter {
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
+        BillType billType = billTypeList.get(position);
+        viewHolder.ivBillType.setImageResource(Constant.TYPE_IMAGES_ID[billType.getImageId()]);
+        viewHolder.tvBillType.setText(billType.getTitle());
         return convertView;
     }
 

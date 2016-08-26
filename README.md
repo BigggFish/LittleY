@@ -1,6 +1,6 @@
 # （记账本）个人项目
 
-* 使用Material Design风格设计。
+* 使用MaterialDesign风格设计。
 
 * 数据使用SQlite存储于本地。
 

@@ -15,12 +15,10 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigggfish.littley.Adapter.DetailAdapter;
-import com.bigggfish.littley.Adapter.ExpandableDetailAdapter;
+import com.bigggfish.littley.adapter.ExpandableDetailAdapter;
 import com.bigggfish.littley.R;
 import com.bigggfish.littley.dao.BillItem;
 import com.bigggfish.littley.dao.TimeItem;

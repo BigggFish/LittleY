@@ -3,7 +3,6 @@ package com.bigggfish.littley.fragment;
 import android.animation.Animator;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigggfish.littley.Adapter.BillTypeAdapter;
+import com.bigggfish.littley.adapter.BillTypeAdapter;
 import com.bigggfish.littley.R;
 import com.bigggfish.littley.dao.BillType;
 import com.bigggfish.littley.model.DBManager;

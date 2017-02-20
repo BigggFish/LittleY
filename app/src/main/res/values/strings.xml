@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LittleY</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add">添加</string>
+    <string name="time">16-07-21</string>
+    <string name="insert_failed">因为一些奇怪的原因，插入数据失败了</string>
+    <string name="money_amount_cant_zero">金额不能为0</string>
+</resources>

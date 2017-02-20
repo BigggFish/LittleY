@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigggfish.littley.Adapter.BillTypeAdapter;
+import com.bigggfish.littley.adapter.BillTypeAdapter;
 import com.bigggfish.littley.R;
 import com.bigggfish.littley.dao.BillType;
 import com.bigggfish.littley.model.DBManager;

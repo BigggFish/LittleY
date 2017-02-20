@@ -1,9 +1,11 @@
 package com.bigggfish.littley.fragment;
 
 import android.animation.Animator;
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,12 +15,14 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+<<<<<<< HEAD
 import android.widget.ListView;
+=======
+>>>>>>> dev
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigggfish.littley.Adapter.DetailAdapter;
-import com.bigggfish.littley.Adapter.ExpandableDetailAdapter;
+import com.bigggfish.littley.adapter.ExpandableDetailAdapter;
 import com.bigggfish.littley.R;
 import com.bigggfish.littley.dao.BillItem;
 import com.bigggfish.littley.dao.TimeItem;
@@ -35,8 +39,13 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     private ImageView expandEditImageView = null;
     private View parentView;
     private ExpandableListView elvDetail;
+<<<<<<< HEAD
     private ExpandableDetailAdapter expandableDetailAdapter;
     private TextView tvDetailAction;
+=======
+    private TextView tvDetailAction;
+    private ExpandableDetailAdapter expandableDetailAdapter;
+>>>>>>> dev
 
     private DBManager dbManager;
     private List<List<BillItem>> billItemLists = new ArrayList<>();
@@ -58,9 +67,39 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e("---->OUT", "onCreateView");
         parentView = inflater.inflate(R.layout.fragment_detail, container, false);
         initView();
         return parentView;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        Log.e("---->OUT", "onAttach1");
+        super.onAttach(activity);
+    }
+    @Override
+    public void onAttach(Context context) {
+        Log.e("---->OUT", "onAttachonAttach");
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onAttachFragment(Fragment childFragment) {
+        Log.e("---->OUT", "onAttachFragment");
+        super.onAttachFragment(childFragment);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        Log.e("---->OUT", "onHiddenChanged");
+        super.onHiddenChanged(hidden);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.e("---->OUT", "onActivityCreated");
+        super.onActivityCreated(savedInstanceState);
     }
 
     private void initView() {
@@ -69,6 +108,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         tvDetailAction = (TextView) parentView.findViewById(R.id.tv_detail_action);
 
         initData();
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
         tvDetailAction.setOnClickListener(this);
         expandableDetailAdapter = new ExpandableDetailAdapter(this.getActivity(), timeItemList, billItemLists);
         elvDetail.setAdapter(expandableDetailAdapter);
@@ -238,6 +281,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         });
     }
 
+<<<<<<< HEAD
     private void colseExpandBillMenu() {
         if (expandDeleteImageView != null && expandEditImageView != null) {
             AnimatorTools.startTranslationAndRotationAnimator(expandEditImageView, expandEditImageView.getX()
@@ -294,11 +338,69 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     }
 
     public void onButtonPressed(Uri uri) {
+=======
+    public void updateData(){
+        initData();
+        expandableDetailAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    private void colseExpandBillMenu() {
+        if (expandDeleteImageView != null && expandEditImageView != null) {
+            AnimatorTools.startTranslationAndRotationAnimator(expandEditImageView, expandEditImageView.getX()
+                    , expandEditImageView.getY(), expandEditImageView.getX() - 200f, expandEditImageView.getY(), 300, new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animator) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animator) {
+                            if (expandEditImageView != null) {
+                                expandEditImageView.setVisibility(View.GONE);
+                                expandEditImageView = null;
+                            }
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animator) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animator) {
+
+                        }
+                    });
+            AnimatorTools.startTranslationAndRotationAnimator(expandDeleteImageView, expandDeleteImageView.getX()
+                    , expandDeleteImageView.getY(), expandDeleteImageView.getX() + 200f, expandDeleteImageView.getY(), 300, new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animator) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animator) {
+                            if (expandDeleteImageView != null) {
+                                expandDeleteImageView.setVisibility(View.GONE);
+                                expandDeleteImageView = null;
+                            }
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animator) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animator) {
+
+                        }
+                    });
+        }
+>>>>>>> dev
+    }
+
+    public void onButtonPressed(Uri uri) {
     }
 
     @Override
@@ -306,6 +408,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         super.onDetach();
     }
 
+<<<<<<< HEAD
     public void refreshData(){
         initData();
         if(expandableDetailAdapter != null){
@@ -320,13 +423,23 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         dbManager = new DBManager(getActivity());
         List<BillItem> billItemList = dbManager.queryAllBill();
         Log.e("---->OUT", "size:" + billItemList.size());
+=======
+    private void  initData() {
+        timeItemList.clear();
+        billItemLists.clear();
+        dbManager = new DBManager(getActivity());
+        List<BillItem> billItemList = dbManager.queryAllBill();
+>>>>>>> dev
         if (billItemList.size() > 0) {
             int dayAmount = 0;
             int billTime = billItemList.get(0).getBillTime();
             List<BillItem> billItemChildList = new ArrayList<>();
             for (int i = 0; i < billItemList.size(); i++) {
                 BillItem billItem = billItemList.get(i);
+<<<<<<< HEAD
                 Log.e("---->OUT", "isspend:" + billItem.isSpend());
+=======
+>>>>>>> dev
                 if (billTime == billItem.getBillTime()) {
                     billItemChildList.add(billItem);
                     if(billItem.isSpend()){
@@ -334,7 +447,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
                     }else{
                         dayAmount = dayAmount - billItem.getAmount();
                     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
                     if (i == billItemList.size() - 1) {
                         billItemLists.add(billItemChildList);
                         timeItemList.add(new TimeItem(dayAmount, billTime));

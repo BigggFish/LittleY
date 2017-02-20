@@ -2,22 +2,24 @@ package com.bigggfish.littley.fragment;
 
 
 import android.animation.Animator;
+<<<<<<< HEAD
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+=======
+>>>>>>> dev
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+<<<<<<< HEAD
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+=======
+>>>>>>> dev
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -25,14 +27,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigggfish.littley.Adapter.BillTypeAdapter;
+import com.bigggfish.littley.adapter.BillTypeAdapter;
 import com.bigggfish.littley.R;
 import com.bigggfish.littley.dao.BillType;
 import com.bigggfish.littley.model.DBManager;
 import com.bigggfish.littley.util.AnimatorTools;
 import com.bigggfish.littley.util.Constant;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddIncomeFragment extends Fragment {

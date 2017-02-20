@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.WindowInsetsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager vpMain;
     private MineFragment mineFragment;
     private DetailFragment detailFragment;
+<<<<<<< HEAD
+=======
+    private AddFragment addFragment;
+>>>>>>> dev
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +75,17 @@ public class MainActivity extends AppCompatActivity {
                 ((RadioButton)rgMain.getChildAt(position)).setChecked(true);
                 switch (position){
                     case 0:
+<<<<<<< HEAD
                         if(detailFragment != null){
                             detailFragment.refreshData();
+=======
+                        Log.e("---->OUT", "detailfragment");
+                        if(detailFragment != null){
+                            Log.e("---->OUT", "detailfragment != null");
+                            detailFragment.updateData();
+                        }else{
+                            Log.e("---->OUT", "detailfragment = null");
+>>>>>>> dev
                         }
                         break;
                     case 1:
@@ -128,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
                     detailFragment = DetailFragment.newInstance();
                     return detailFragment;
                 case 1:
-                    return AddFragment.newInstance();
+                    addFragment = AddFragment.newInstance();
+                    return addFragment;
                 case 2:
                     mineFragment = MineFragment.newInstance("", "");
                     return mineFragment;

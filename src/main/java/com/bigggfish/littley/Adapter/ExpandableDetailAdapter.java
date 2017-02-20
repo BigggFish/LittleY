@@ -1,15 +1,10 @@
-package com.bigggfish.littley.Adapter;
+package com.bigggfish.littley.adapter;
 
-import android.animation.Animator;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,7 +12,10 @@ import android.widget.TextView;
 import com.bigggfish.littley.R;
 import com.bigggfish.littley.dao.BillItem;
 import com.bigggfish.littley.dao.TimeItem;
+<<<<<<< HEAD
 import com.bigggfish.littley.util.AnimatorTools;
+=======
+>>>>>>> dev
 import com.bigggfish.littley.util.Constant;
 
 import java.util.List;

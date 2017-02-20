@@ -34,6 +34,10 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private String mParam1;
     private String mParam2;
     private boolean isLogin = false;
+<<<<<<< HEAD
+=======
+    private boolean needPassword = false;
+>>>>>>> dev
 
     private View parent;
     private Toolbar toolbar;
@@ -95,10 +99,16 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         }else{
             tvLogin.setText(userName);
             isLogin = true;
+<<<<<<< HEAD
             int spendLimit = (int)SPUtils.get(getActivity(), "spendlimit", 3000);
             tvSpendLimit.setText("￥" + spendLimit);
         }
 
+=======
+        }
+        int spendLimit = (int)SPUtils.get(getActivity(), "spendlimit", 3000);
+        tvSpendLimit.setText("" + spendLimit);
+>>>>>>> dev
         rlSpendLimit.setOnClickListener(this);
         tvFeedback.setOnClickListener(this);
         tvCheckUpdate.setOnClickListener(this);
@@ -107,10 +117,22 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         switchCompatNeedPw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+<<<<<<< HEAD
                 if(checked){
                     SPUtils.put(MineFragment.this.getActivity(), "haspassword", true);
                 }else{
                     SPUtils.put(MineFragment.this.getActivity(), "haspassword", false);
+=======
+                needPassword = checked;
+                if(checked){
+                    if("".equals(SPUtils.get(MineFragment.this.getActivity(), "password",""))){
+                        showPasswordDialog();
+                    }
+                }else{
+                    if(!"".equals(SPUtils.get(MineFragment.this.getActivity(), "password",""))){
+                        showTestPasswordDialog();
+                    }
+>>>>>>> dev
                 }
             }
         });
@@ -160,6 +182,11 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
     private void showLimitDialog(){
         final EditText etLimit = new EditText(this.getActivity());
+<<<<<<< HEAD
+=======
+        int spendLimit = (int)SPUtils.get(MineFragment.this.getActivity(), "spendlimit", 0);
+        etLimit.setText(""+ (spendLimit == 0 ? 3000 : spendLimit));
+>>>>>>> dev
         etLimit.setInputType(InputType.TYPE_CLASS_NUMBER);
         new AlertDialog.Builder(this.getActivity())
                 .setTitle("请输入")
@@ -168,10 +195,17 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(etLimit.getText() == null || "".equals(etLimit.getText().toString())){
+<<<<<<< HEAD
                             tvSpendLimit.setText("￥0");
                         }else{
                             int spendLimit = Integer.valueOf(etLimit.getText().toString());
                             tvSpendLimit.setText("￥" + spendLimit);
+=======
+                            Toast.makeText(MineFragment.this.getActivity(), "输入限制金额不能为空", Toast.LENGTH_SHORT).show();
+                        }else{
+                            int spendLimit = Integer.valueOf(etLimit.getText().toString());
+                            tvSpendLimit.setText("" + spendLimit);
+>>>>>>> dev
                             SPUtils.put(MineFragment.this.getActivity(), "spendlimit", spendLimit);
                         }
                         dialogInterface.dismiss();
@@ -223,24 +257,83 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         final EditText etPassword = new EditText(this.getActivity());
         etPassword.setInputType(InputType.TYPE_CLASS_NUMBER);
         new AlertDialog.Builder(this.getActivity())
+<<<<<<< HEAD
                 .setTitle("请输入密码")
+=======
+                .setTitle("请输入新密码")
+>>>>>>> dev
                 .setView(etPassword)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+<<<<<<< HEAD
                         SPUtils.put(MineFragment.this.getActivity(),etPassword.getText().toString(), "");
                         dialogInterface.dismiss();
+=======
+                        if(!"".equals(etPassword.getText().toString())){
+                            SPUtils.put(MineFragment.this.getActivity(), "password", etPassword.getText().toString());
+                            dialogInterface.dismiss();
+                            switchCompatNeedPw.setChecked(true);
+                        }else{
+                            switchCompatNeedPw.setChecked(false);
+                            Toast.makeText(MineFragment.this.getActivity(), "您输入的密码不能为空", Toast.LENGTH_SHORT).show();
+                        }
+>>>>>>> dev
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+<<<<<<< HEAD
+=======
+                        switchCompatNeedPw.setChecked(false);
+>>>>>>> dev
                     }
                 })
                 .show();
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * 验证密码
+     */
+    private void showTestPasswordDialog(){
+        final EditText etPassword = new EditText(this.getActivity());
+        etPassword.setInputType(InputType.TYPE_CLASS_NUMBER);
+        new AlertDialog.Builder(this.getActivity())
+                .setTitle("请输入旧密码")
+                .setView(etPassword)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(!"".equals(etPassword.getText().toString())){
+                            if(etPassword.getText().toString().equals(SPUtils.get(MineFragment.this.getActivity(), "password", ""))){
+                                SPUtils.put(MineFragment.this.getActivity(), "password", "");
+                                dialogInterface.dismiss();
+                                showPasswordDialog();
+                            }else{
+                                switchCompatNeedPw.setChecked(true);
+                                Toast.makeText(MineFragment.this.getActivity(), "您输入的密码不正确", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            switchCompatNeedPw.setChecked(true);
+                            Toast.makeText(MineFragment.this.getActivity(), "您输入的密码不能为空", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        switchCompatNeedPw.setChecked(true);
+                    }
+                })
+                .show();
+    }
+>>>>>>> dev
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 

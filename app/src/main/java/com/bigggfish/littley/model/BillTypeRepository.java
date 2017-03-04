@@ -37,7 +37,7 @@ public class BillTypeRepository implements IBillTypeDataSource {
 
     @Override
     public List<BillType> getSpendBillTypeList() {
-        return mDBManager.queryIncomeBillType();
+        return mDBManager.querySpendBillType();
     }
 
 }

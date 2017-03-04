@@ -103,7 +103,7 @@ public class AddIncomeFragment extends Fragment {
                 float fromY = gvIncomeType.getTop() + gvIncomeType.getPaddingTop()
                         + view.getHeight() * (i / 5) + imageView.getTop();
                 float fromX = view.getWidth() * (i % 5) + imageView.getLeft();
-                nowBillTypeId = i + 1;
+                nowBillTypeId = i + 14;
                 ivAnmimation.setVisibility(View.VISIBLE);
                 ivAnmimation.setImageResource(Constant.TYPE_IMAGES_ID[ 14 + j]);
                 AnimatorTools.startTranslationAnimator(ivAnmimation, fromX, fromY, toX

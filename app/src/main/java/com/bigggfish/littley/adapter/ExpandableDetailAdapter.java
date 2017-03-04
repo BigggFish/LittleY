@@ -113,12 +113,12 @@ public class ExpandableDetailAdapter extends BaseExpandableListAdapter {
             childViewHolder.tvSpendAmount.setVisibility(View.VISIBLE);
             childViewHolder.tvSpendAmount.setText("￥" + billItem.getAmount());
             childViewHolder.tvIncomeAmount.setVisibility(View.INVISIBLE);
-            childViewHolder.ivDetailType.setImageResource(Constant.TYPE_IMAGES_ID[billItem.getBillTypeId()-1]);
+            childViewHolder.ivDetailType.setImageResource(Constant.TYPE_IMAGES_ID[billItem.getBillTypeId()]);
         }else{
             childViewHolder.tvIncomeAmount.setVisibility(View.VISIBLE);
             childViewHolder.tvIncomeAmount.setText("￥" + billItem.getAmount());
             childViewHolder.tvSpendAmount.setVisibility(View.INVISIBLE);
-            childViewHolder.ivDetailType.setImageResource(Constant.TYPE_IMAGES_ID[billItem.getBillTypeId()-1 + 14]);
+            childViewHolder.ivDetailType.setImageResource(Constant.TYPE_IMAGES_ID[billItem.getBillTypeId()]);
         }
         final View itemView = convertView;
         if(groupPosition != expandGroupPosition && childPosition != expandChildPosition){

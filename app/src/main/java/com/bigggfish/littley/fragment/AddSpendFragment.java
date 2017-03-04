@@ -102,7 +102,7 @@ public class AddSpendFragment extends Fragment {
                 float fromX = view.getWidth() * (i % 5) + imageView.getLeft();
                 ivAnmimation.setVisibility(View.VISIBLE);
                 ivAnmimation.setImageResource(Constant.TYPE_IMAGES_ID[j]);
-                nowBillTypeId = i + 1;
+                nowBillTypeId = i;
                 AnimatorTools.startTranslationAnimator(ivAnmimation, fromX, fromY, toX
                         , toY, 300, new Animator.AnimatorListener() {
                             @Override
@@ -150,7 +150,7 @@ public class AddSpendFragment extends Fragment {
                 billItem.setAmount(amount);
                 billItem.setTimeStamp(currentTime);
                 billItem.setBillTime(billTime);
-                billItem.setSpend(false);
+                billItem.setSpend(true);
                 billItem.setBillTypeId(nowBillTypeId);
                 billItem.setBillRemark(remark);
                 if(!mBillRepository.insertBill(billItem)){

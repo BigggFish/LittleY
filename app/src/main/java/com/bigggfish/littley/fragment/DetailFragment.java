@@ -244,6 +244,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     public void updateData(){
         initData();
         expandableDetailAdapter.notifyDataSetChanged();
+        for (int i = 0; i < expandableDetailAdapter.getGroupCount(); i++) {
+            elvDetail.expandGroup(i);
+        }
     }
 
     private void colseExpandBillMenu() {

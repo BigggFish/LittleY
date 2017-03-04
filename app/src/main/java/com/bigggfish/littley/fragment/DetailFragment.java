@@ -65,35 +65,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         return parentView;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        Log.e("---->OUT", "onAttach1");
-        super.onAttach(activity);
-    }
-    @Override
-    public void onAttach(Context context) {
-        Log.e("---->OUT", "onAttachonAttach");
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onAttachFragment(Fragment childFragment) {
-        Log.e("---->OUT", "onAttachFragment");
-        super.onAttachFragment(childFragment);
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        Log.e("---->OUT", "onHiddenChanged");
-        super.onHiddenChanged(hidden);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        Log.e("---->OUT", "onActivityCreated");
-        super.onActivityCreated(savedInstanceState);
-    }
-
     private void initView() {
         elvDetail = (ExpandableListView) parentView.findViewById(R.id.lv_detail);
         elvDetail.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.layout_detail_head, null));
@@ -330,8 +301,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public void onButtonPressed(Uri uri) {
-    }
 
     @Override
     public void onDetach() {
@@ -342,6 +311,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         timeItemList.clear();
         billItemLists.clear();
         List<BillItem> billItemList = mBillRepository.queryAllBill();
+        Log.e("---->OUT", "billItemListSize" + billItemList.size());
         if (billItemList.size() > 0) {
             int dayAmount = 0;
             int billTime = billItemList.get(0).getBillTime();

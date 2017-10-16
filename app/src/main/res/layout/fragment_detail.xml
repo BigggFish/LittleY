@@ -5,7 +5,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:scrollbars="none"
-    tools:context="com.bigggfish.littley.fragment.DetailFragment">
+    tools:context=".ui.fragment.DetailFragment">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

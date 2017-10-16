@@ -1,7 +1,6 @@
-package com.bigggfish.littley.activity;
+package com.bigggfish.littley.ui.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -9,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.bigggfish.littley.R;
-import com.bigggfish.littley.util.Constant;
 
 import java.lang.ref.WeakReference;
 

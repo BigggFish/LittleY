@@ -1,4 +1,4 @@
-package com.bigggfish.littley.activity;
+package com.bigggfish.littley.ui.activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -12,14 +12,16 @@ import android.support.v4.view.WindowInsetsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.bigggfish.littley.R;
-import com.bigggfish.littley.fragment.AddFragment;
-import com.bigggfish.littley.fragment.DetailFragment;
-import com.bigggfish.littley.fragment.MineFragment;
+import com.bigggfish.littley.ui.fragment.AddFragment;
+import com.bigggfish.littley.ui.fragment.DetailFragment;
+import com.bigggfish.littley.ui.fragment.MineFragment;
+import com.bigggfish.littley.util.DoubleClickExitHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private MineFragment mineFragment;
     private DetailFragment detailFragment;
     private AddFragment addFragment;
+    private DoubleClickExitHelper mDoubleClickExitHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView(){
+
+        mDoubleClickExitHelper = new DoubleClickExitHelper(this);
+
         rgMain = (RadioGroup) findViewById(R.id.rg_main);
         vpMain = (ViewPager) findViewById(R.id.vp_main);
         ((RadioButton)rgMain.getChildAt(1)).setChecked(true);
@@ -156,5 +163,13 @@ public class MainActivity extends AppCompatActivity {
             mineFragment.onActivityResult(requestCode, resultCode, data);
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return mDoubleClickExitHelper.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

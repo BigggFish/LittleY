@@ -1,11 +1,7 @@
-package com.bigggfish.littley.fragment;
+package com.bigggfish.littley.ui.fragment;
 
 import android.animation.Animator;
-import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigggfish.littley.adapter.ExpandableDetailAdapter;
+import com.bigggfish.littley.ui.adapter.ExpandableDetailAdapter;
 import com.bigggfish.littley.R;
 import com.bigggfish.littley.model.BillRepository;
 import com.bigggfish.littley.model.dao.BillItem;

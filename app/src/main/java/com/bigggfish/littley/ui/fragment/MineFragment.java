@@ -1,4 +1,4 @@
-package com.bigggfish.littley.fragment;
+package com.bigggfish.littley.ui.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigggfish.littley.activity.LoginActivity;
+import com.bigggfish.littley.ui.activity.LoginActivity;
 import com.bigggfish.littley.R;
 import com.bigggfish.littley.util.SPUtils;
 

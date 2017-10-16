@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_splash"
-    tools:context="com.bigggfish.littley.activity.SplashActivity">
+    tools:context=".ui.activity.SplashActivity">
 
 </FrameLayout>

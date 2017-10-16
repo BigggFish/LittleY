@@ -1,4 +1,4 @@
-package com.bigggfish.littley.adapter;
+package com.bigggfish.littley.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

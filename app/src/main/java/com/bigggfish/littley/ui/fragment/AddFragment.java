@@ -1,4 +1,4 @@
-package com.bigggfish.littley.fragment;
+package com.bigggfish.littley.ui.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

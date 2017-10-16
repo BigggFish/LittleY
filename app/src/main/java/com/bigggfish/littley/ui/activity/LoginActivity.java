@@ -1,4 +1,4 @@
-package com.bigggfish.littley.activity;
+package com.bigggfish.littley.ui.activity;
 
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;

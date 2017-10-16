@@ -4,6 +4,7 @@ package com.bigggfish.littley.model.dao;
  * Created by android on 2016/7/25.
  */
 public class TimeItem {
+
     private int id;
     private int dayAmount;
     private long timeStamp;

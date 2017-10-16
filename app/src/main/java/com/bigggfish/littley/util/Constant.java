@@ -1,6 +1,10 @@
 package com.bigggfish.littley.util;
 
+import android.os.Environment;
+
 import com.bigggfish.littley.R;
+
+import java.io.File;
 
 /**
  * Created by android on 2016/7/26.
@@ -39,5 +43,19 @@ public class Constant {
             R.drawable.icon_shouru_type_touzishouru,
             R.drawable.icon_shouru_type_qita
     };
+
+
+    /**
+     * 应用文件目录
+     */
+    public static String BASE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "littley";
+    public static String SOFT_PATH = BASE_PATH + File.separator + "littley";
+    public static String LOG_PATH = SOFT_PATH + File.separator + "log";
+    public static String PORTRAIT_PATH = SOFT_PATH + File.separator + "portrait";
+    public static String IMAGE_PATH = SOFT_PATH + File.separator + "images";
+    public static String CACHE_PATH = SOFT_PATH + File.separator + "cache";
+    public static String DOWNLOAD_PATH = SOFT_PATH + File.separator + "download";
+    public static String CRASH_PATH = LOG_PATH + File.separator + "crash" + File.separator;
+
 
 }

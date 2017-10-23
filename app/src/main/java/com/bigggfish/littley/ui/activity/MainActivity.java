@@ -18,43 +18,49 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.bigggfish.littley.R;
+import com.bigggfish.littley.ui.base.BaseActivity;
 import com.bigggfish.littley.ui.fragment.AddFragment;
 import com.bigggfish.littley.ui.fragment.DetailFragment;
 import com.bigggfish.littley.ui.fragment.MineFragment;
 import com.bigggfish.littley.util.DoubleClickExitHelper;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.OnPageChange;
 
-    private RadioGroup rgMain;
-    private ViewPager vpMain;
+public class MainActivity extends BaseActivity {
+
+    @BindView(R.id.rg_main)
+    RadioGroup rgMain;
+    @BindView(R.id.vp_main)
+    ViewPager vpMain;
+
     private MineFragment mineFragment;
     private DetailFragment detailFragment;
     private AddFragment addFragment;
+
     private DoubleClickExitHelper mDoubleClickExitHelper;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView();
+    protected int initLayout() {
+        return R.layout.activity_main;
     }
 
-    private void initView(){
+    @Override
+    protected void initView() {
 
         mDoubleClickExitHelper = new DoubleClickExitHelper(this);
 
-        rgMain = (RadioGroup) findViewById(R.id.rg_main);
-        vpMain = (ViewPager) findViewById(R.id.vp_main);
-        ((RadioButton)rgMain.getChildAt(1)).setChecked(true);
+        ((RadioButton) rgMain.getChildAt(1)).setChecked(true);
         vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         vpMain.setCurrentItem(1);
+
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
         rgMain.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i){
+                switch (i) {
                     case R.id.rb_detail:
                         vpMain.setCurrentItem(0);
                         break;
@@ -77,14 +83,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                ((RadioButton)rgMain.getChildAt(position)).setChecked(true);
-                switch (position){
+                ((RadioButton) rgMain.getChildAt(position)).setChecked(true);
+                switch (position) {
                     case 0:
                         Log.e("---->OUT", "detailfragment");
-                        if(detailFragment != null){
+                        if (detailFragment != null) {
                             Log.e("---->OUT", "detailfragment != null");
                             detailFragment.updateData();
-                        }else{
+                        } else {
                             Log.e("---->OUT", "detailfragment = null");
                         }
                         break;
@@ -126,10 +132,12 @@ public class MainActivity extends AppCompatActivity {
                         }
                         return consumed ? insets.consumeSystemWindowInsets() : insets;
                     }
-                });
+                }
+        );
 
     }
-    class MainPagerAdapter extends FragmentPagerAdapter{
+
+    class MainPagerAdapter extends FragmentPagerAdapter {
 
         public MainPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -137,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            switch (position) {
                 case 0:
                     detailFragment = DetailFragment.newInstance();
                     return detailFragment;
@@ -159,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == 202 && mineFragment != null){
+        if (resultCode == 202 && mineFragment != null) {
             mineFragment.onActivityResult(requestCode, resultCode, data);
         }
         super.onActivityResult(requestCode, resultCode, data);

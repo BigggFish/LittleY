@@ -4,13 +4,10 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Environment;
 
-import com.tigercel.traffic.AppConfig;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Log日志输出控制类 。debug控制日志输出，可打印到sd卡。封版后关闭调试日志。

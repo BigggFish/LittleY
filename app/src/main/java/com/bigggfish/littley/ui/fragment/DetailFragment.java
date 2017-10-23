@@ -19,25 +19,30 @@ import com.bigggfish.littley.R;
 import com.bigggfish.littley.model.BillRepository;
 import com.bigggfish.littley.model.dao.BillItem;
 import com.bigggfish.littley.model.dao.TimeItem;
+import com.bigggfish.littley.ui.base.BaseFragment;
 import com.bigggfish.littley.util.AnimatorTools;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 
-public class DetailFragment extends Fragment implements View.OnClickListener{
+
+public class DetailFragment extends BaseFragment implements View.OnClickListener {
 
     private ImageView expandDeleteImageView = null;
     private ImageView expandEditImageView = null;
-    private View parentView;
-    private ExpandableListView elvDetail;
-    private TextView tvDetailAction;
+
+    @BindView(R.id.lv_detail)
+    ExpandableListView elvDetail;
+
     private ExpandableDetailAdapter expandableDetailAdapter;
 
     private List<List<BillItem>> billItemLists = new ArrayList<>();
     private List<TimeItem> timeItemList = new ArrayList<>();
 
     private BillRepository mBillRepository;
+
     public DetailFragment() {
     }
 
@@ -52,23 +57,15 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         mBillRepository = BillRepository.getInstance(getActivity());
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        Log.e("---->OUT", "onCreateView");
-        parentView = inflater.inflate(R.layout.fragment_detail, container, false);
-        initView();
-        return parentView;
+    protected int initLayout() {
+        return R.layout.fragment_detail;
     }
 
-    private void initView() {
-        elvDetail = (ExpandableListView) parentView.findViewById(R.id.lv_detail);
+    @Override
+    protected void initView(View rootView) {
         elvDetail.addHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.layout_detail_head, null));
-        tvDetailAction = (TextView) parentView.findViewById(R.id.tv_detail_action);
-
-        initData();
-
-        tvDetailAction.setOnClickListener(this);
         expandableDetailAdapter = new ExpandableDetailAdapter(this.getActivity(), timeItemList, billItemLists);
         elvDetail.setAdapter(expandableDetailAdapter);
         elvDetail.setGroupIndicator(null);
@@ -235,9 +232,11 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
                 return false;
             }
         });
+
+        initData();
     }
 
-    public void updateData(){
+    public void updateData() {
         initData();
         expandableDetailAdapter.notifyDataSetChanged();
         for (int i = 0; i < expandableDetailAdapter.getGroupCount(); i++) {
@@ -301,12 +300,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     }
 
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    private void  initData() {
+    private void initData() {
         timeItemList.clear();
         billItemLists.clear();
         List<BillItem> billItemList = mBillRepository.queryAllBill();
@@ -319,9 +313,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
                 BillItem billItem = billItemList.get(i);
                 if (billTime == billItem.getBillTime()) {
                     billItemChildList.add(billItem);
-                    if(billItem.isSpend()){
+                    if (billItem.isSpend()) {
                         dayAmount = dayAmount + billItem.getAmount();
-                    }else{
+                    } else {
                         dayAmount = dayAmount - billItem.getAmount();
                     }
                     if (i == billItemList.size() - 1) {
@@ -335,9 +329,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
                     billItemChildList = new ArrayList<>();
                     dayAmount = 0;
                     billItemChildList.add(billItem);
-                    if(billItem.isSpend()){
+                    if (billItem.isSpend()) {
                         dayAmount = dayAmount + billItem.getAmount();
-                    }else{
+                    } else {
                         dayAmount = dayAmount - billItem.getAmount();
                     }
                 }
@@ -347,10 +341,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tv_detail_action:
-
-                break;
+        switch (view.getId()) {
         }
     }
 }

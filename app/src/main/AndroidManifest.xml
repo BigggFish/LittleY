@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bigggfish.littley">
+          package="com.bigggfish.littley">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/icon_littley"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.MainActivity">
-
         </activity>
-        <activity android:name=".ui.activity.LoginActivity"
+        <activity
+            android:name=".ui.activity.LoginActivity"
             android:theme="@style/NormalTheme"/>
-        <activity android:name=".ui.activity.SplashActivity"
+        <activity
+            android:name=".ui.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
+        <activity android:name=".ui.activity.Main2Activity">
 
+        </activity>
+        <activity android:name=".ui.activity.Main3Activity">
+
+        </activity>
+    </application>
 
 </manifest>

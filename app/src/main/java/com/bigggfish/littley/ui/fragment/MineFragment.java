@@ -1,21 +1,15 @@
 package com.bigggfish.littley.ui.fragment;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -24,26 +18,36 @@ import android.widget.Toast;
 
 import com.bigggfish.littley.ui.activity.LoginActivity;
 import com.bigggfish.littley.R;
+import com.bigggfish.littley.ui.base.BaseFragment;
 import com.bigggfish.littley.util.SPUtils;
 
-public class MineFragment extends Fragment implements View.OnClickListener{
+import butterknife.BindView;
 
-    private String mParam1;
-    private String mParam2;
+public class MineFragment extends BaseFragment implements View.OnClickListener {
+
     private boolean isLogin = false;
     private boolean needPassword = false;
 
-    private View parent;
-    private Toolbar toolbar;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
-    private TextView tvLogin;
-    private TextView tvClearData;
-    private TextView tvSpendLimit;
-    private RelativeLayout rlSpendLimit;
-    private TextView tvFeedback;
-    private TextView tvCheckUpdate;
-    private TextView tvAboutUs;
-    private SwitchCompat switchCompatNeedPw;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.collapse_toolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.tv_login)
+    TextView tvLogin;
+    @BindView(R.id.tv_clear_data)
+    TextView tvClearData;
+    @BindView(R.id.tv_spend_limit)
+    TextView tvSpendLimit;
+    @BindView(R.id.rl_spend_limit)
+    RelativeLayout rlSpendLimit;
+    @BindView(R.id.tv_feedback)
+    TextView tvFeedback;
+    @BindView(R.id.tv_check_update)
+    TextView tvCheckUpdate;
+    @BindView(R.id.tv_about_us)
+    TextView tvAboutUs;
+    @BindView(R.id.switch_need_pw)
+    SwitchCompat switchCompatNeedPw;
 
     public MineFragment() {
     }
@@ -54,40 +58,23 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int initLayout() {
+        return R.layout.fragment_mine;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        parent = inflater.inflate(R.layout.fragment_mine, container, false);
-        initView();
-        return parent;
-    }
+    protected void initView(View rootView) {
 
-    private void initView(){
-        collapsingToolbarLayout = (CollapsingToolbarLayout) parent.findViewById(R.id.collapse_toolbar);
-        toolbar = (Toolbar) parent.findViewById(R.id.toolbar);
-        tvLogin = (TextView) parent.findViewById(R.id.tv_login);
-        tvClearData = (TextView) parent.findViewById(R.id.tv_clear_data);
-        tvSpendLimit = (TextView) parent.findViewById(R.id.tv_spend_limit);
-        tvFeedback = (TextView) parent.findViewById(R.id.tv_feedback);
-        tvCheckUpdate = (TextView) parent.findViewById(R.id.tv_check_update);
-        tvAboutUs = (TextView) parent.findViewById(R.id.tv_about_us);
-        rlSpendLimit = (RelativeLayout) parent.findViewById(R.id.rl_spend_limit);
-        switchCompatNeedPw = (SwitchCompat) parent.findViewById(R.id.switch_need_pw);
-
-        String userName = (String)SPUtils.get(getActivity(), "username", "");
-        if(TextUtils.isEmpty(userName)){
+        String userName = (String) SPUtils.get(getActivity(), "username", "");
+        if (TextUtils.isEmpty(userName)) {
             isLogin = false;
             tvLogin.setOnClickListener(this);
-        }else{
+        } else {
             tvLogin.setText(userName);
             isLogin = true;
         }
-        int spendLimit = (int)SPUtils.get(getActivity(), "spendlimit", 3000);
-        tvSpendLimit.setText("" + spendLimit);
+        int spendLimit = (int) SPUtils.get(getActivity(), "spendlimit", 3000);
+        tvSpendLimit.setText(String.valueOf(spendLimit));
         rlSpendLimit.setOnClickListener(this);
         tvFeedback.setOnClickListener(this);
         tvCheckUpdate.setOnClickListener(this);
@@ -97,12 +84,12 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 needPassword = checked;
-                if(checked){
-                    if("".equals(SPUtils.get(MineFragment.this.getActivity(), "password",""))){
+                if (checked) {
+                    if ("".equals(SPUtils.get(MineFragment.this.getActivity(), "password", ""))) {
                         showPasswordDialog();
                     }
-                }else{
-                    if(!"".equals(SPUtils.get(MineFragment.this.getActivity(), "password",""))){
+                } else {
+                    if (!"".equals(SPUtils.get(MineFragment.this.getActivity(), "password", ""))) {
                         showTestPasswordDialog();
                     }
                 }
@@ -112,22 +99,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         collapsingToolbarLayout.setTitleEnabled(false);
     }
 
-    public void onButtonPressed(Uri uri) {
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_login:
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 getActivity().startActivityForResult(intent, 201);
@@ -152,10 +126,10 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void showLimitDialog(){
+    private void showLimitDialog() {
         final EditText etLimit = new EditText(this.getActivity());
-        int spendLimit = (int)SPUtils.get(MineFragment.this.getActivity(), "spendlimit", 0);
-        etLimit.setText(""+ (spendLimit == 0 ? 3000 : spendLimit));
+        int spendLimit = (int) SPUtils.get(MineFragment.this.getActivity(), "spendlimit", 0);
+        etLimit.setText(String.valueOf(spendLimit == 0 ? 3000 : spendLimit));
         etLimit.setInputType(InputType.TYPE_CLASS_NUMBER);
         new AlertDialog.Builder(this.getActivity())
                 .setTitle("请输入")
@@ -163,9 +137,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(etLimit.getText() == null || "".equals(etLimit.getText().toString())){
+                        if (etLimit.getText() == null || "".equals(etLimit.getText().toString())) {
                             Toast.makeText(MineFragment.this.getActivity(), "输入限制金额不能为空", Toast.LENGTH_SHORT).show();
-                        }else{
+                        } else {
                             int spendLimit = Integer.valueOf(etLimit.getText().toString());
                             tvSpendLimit.setText("" + spendLimit);
                             SPUtils.put(MineFragment.this.getActivity(), "spendlimit", spendLimit);
@@ -182,7 +156,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 .show();
     }
 
-    private void showDialog(String message ){
+    private void showDialog(String message) {
         new AlertDialog.Builder(this.getActivity())
                 .setTitle("提示")
                 .setMessage(message)
@@ -196,7 +170,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     }
 
     //后期需要对是否加密做判断
-    private void showClearDataDialog(){
+    private void showClearDataDialog() {
         new AlertDialog.Builder(this.getActivity())
                 .setTitle("提示")
                 .setMessage("您确定要删除所有数据吗?")
@@ -215,7 +189,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 .show();
     }
 
-    private void showPasswordDialog(){
+    private void showPasswordDialog() {
         final EditText etPassword = new EditText(this.getActivity());
         etPassword.setInputType(InputType.TYPE_CLASS_NUMBER);
         new AlertDialog.Builder(this.getActivity())
@@ -224,11 +198,11 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(!"".equals(etPassword.getText().toString())){
+                        if (!"".equals(etPassword.getText().toString())) {
                             SPUtils.put(MineFragment.this.getActivity(), "password", etPassword.getText().toString());
                             dialogInterface.dismiss();
                             switchCompatNeedPw.setChecked(true);
-                        }else{
+                        } else {
                             switchCompatNeedPw.setChecked(false);
                             Toast.makeText(MineFragment.this.getActivity(), "您输入的密码不能为空", Toast.LENGTH_SHORT).show();
                         }
@@ -247,7 +221,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     /**
      * 验证密码
      */
-    private void showTestPasswordDialog(){
+    private void showTestPasswordDialog() {
         final EditText etPassword = new EditText(this.getActivity());
         etPassword.setInputType(InputType.TYPE_CLASS_NUMBER);
         new AlertDialog.Builder(this.getActivity())
@@ -256,16 +230,16 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(!"".equals(etPassword.getText().toString())){
-                            if(etPassword.getText().toString().equals(SPUtils.get(MineFragment.this.getActivity(), "password", ""))){
+                        if (!"".equals(etPassword.getText().toString())) {
+                            if (etPassword.getText().toString().equals(SPUtils.get(MineFragment.this.getActivity(), "password", ""))) {
                                 SPUtils.put(MineFragment.this.getActivity(), "password", "");
                                 dialogInterface.dismiss();
                                 showPasswordDialog();
-                            }else{
+                            } else {
                                 switchCompatNeedPw.setChecked(true);
                                 Toast.makeText(MineFragment.this.getActivity(), "您输入的密码不正确", Toast.LENGTH_SHORT).show();
                             }
-                        }else{
+                        } else {
                             switchCompatNeedPw.setChecked(true);
                             Toast.makeText(MineFragment.this.getActivity(), "您输入的密码不能为空", Toast.LENGTH_SHORT).show();
                         }
@@ -281,14 +255,15 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 })
                 .show();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(getActivity() == null){
-            Log.e("---->OUT","getactivity == null");
-        }else{
-            if(resultCode == 202){
-                tvLogin.setText((String)SPUtils.get(getActivity(), "username", ""));
+        if (getActivity() == null) {
+            Log.e("---->OUT", "getactivity == null");
+        } else {
+            if (resultCode == 202) {
+                tvLogin.setText((String) SPUtils.get(getActivity(), "username", ""));
                 isLogin = true;
             }
         }

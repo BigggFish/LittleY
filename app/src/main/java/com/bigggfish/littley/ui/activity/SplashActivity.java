@@ -4,22 +4,22 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.bigggfish.littley.R;
+import com.bigggfish.littley.ui.base.BaseActivity;
 
 import java.lang.ref.WeakReference;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     private static final int TAG_GOTO_MAIN = 1;
     private static final int TOTAL_TIME_IN_SPLASH = 2000;//ms
 
-    static class MyHandler extends Handler{
+    private static class MyHandler extends Handler{
 
         private WeakReference<Activity> refActivity;
-        public MyHandler(Activity activity){
+
+        private MyHandler(Activity activity){
             refActivity = new WeakReference<>(activity);
         }
 
@@ -27,30 +27,26 @@ public class SplashActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             final Activity activity = refActivity.get();
             if(activity != null){
-                gotoMainActivity(activity);
+                Intent intent = new Intent(activity, MainActivity.class);
+                activity.startActivity(intent);
+                activity.finish();
             }
         }
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void init() {
+        super.init();
         setTheme(R.style.NormalTheme);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        initView();
     }
 
-    private void initView(){
+    @Override
+    protected void initView(){
         new MyHandler(this).sendEmptyMessageDelayed(TAG_GOTO_MAIN, TOTAL_TIME_IN_SPLASH);
     }
 
-
-    ///////////////////////////static///////////////////////////////////////
-
-
-    private static void gotoMainActivity(Activity activity){
-        Intent intent = new Intent(activity, MainActivity.class);
-        activity.startActivity(intent);
-        activity.finish();
+    @Override
+    protected int initLayout() {
+        return R.layout.activity_splash;
     }
 }

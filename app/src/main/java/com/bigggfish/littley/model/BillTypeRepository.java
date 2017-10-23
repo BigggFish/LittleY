@@ -8,14 +8,13 @@ import com.bigggfish.littley.model.local.DBManager;
 import java.util.List;
 
 /**
- * Created by 于祥龙 on 2017/2/20.
+ * Created by bigggfish on 2017/2/20.
  * 条目类型仓库
  */
 public class BillTypeRepository implements IBillTypeDataSource {
 
     public static BillTypeRepository mInstance = null;
     private DBManager mDBManager;
-    private Context mContext;
 
     public static BillTypeRepository getInstance(Context context){
         if(mInstance == null){
@@ -26,7 +25,6 @@ public class BillTypeRepository implements IBillTypeDataSource {
 
     private BillTypeRepository(Context context){
         mDBManager = new DBManager(context);
-        mContext = context;
     }
 
 

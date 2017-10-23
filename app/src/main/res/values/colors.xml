@@ -168,4 +168,14 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
+
+
+    <color name="cyan_500">#ff00bcd4</color><!-- cyan 500 -->
+    <color name="indigo_500">#ff3f51b5</color><!-- indigo 500 -->
+    <color name="blue_500">#ff4285f4</color><!-- blue 500 -->
+    <color name="pink_500">#ffe91e63</color><!-- pink 500 -->
+    <color name="green_500">#ff0f9d58</color><!-- green 500 -->
+    <color name="light_green_500">#ff8bc34a</color><!-- light green 500 -->
+    <color name="orange_500">#ffff9800</color><!-- orange 500 -->
+    <color name="deep_orange_500">#ffff5722</color><!-- deep orange 500 -->
 </resources>
